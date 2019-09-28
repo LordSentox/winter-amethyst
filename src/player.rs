@@ -22,6 +22,14 @@ impl Player {
     pub fn set_pos(&mut self, pos: Vec2<f32>) {
         self.collision_rect.set_pos(pos);
     }
+
+    pub fn collision_rect(&self) -> &CollisionRect {
+        &self.collision_rect
+    }
+
+    pub fn translate(&mut self, by: Vec2<f32>) {
+        self.collision_rect.translate(by);
+    }
 }
 
 impl Component for Player {

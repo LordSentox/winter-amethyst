@@ -1,6 +1,6 @@
 use amethyst::{
     core::Transform,
-    ecs::{Component, ReadStorage, WriteStorage, System, VecStorage},
+    ecs::{Component, Join, ReadStorage, WriteStorage, System, VecStorage},
 };
 
 use crate::math::Rect;
@@ -20,7 +20,15 @@ impl<'s> System<'s> for Collision {
         ReadStorage<'s, CollisionRect>
     );
 
-    fn run(&mut self, (mut player, colliders): Self::SystemData) {
-        
+    fn run(&mut self, (mut players, colliders): Self::SystemData) {
+        // Let all players collide with all colliders
+        for player in (&mut players).join() {
+            for collider in (&colliders).join() {
+                if CollisionRect::intersect(player.collision_rect(), collider) {
+                    let way_out = player.collision_rect().shortest_way_out(collider);
+                    player.translate(way_out);
+                }
+            }
+        }
     }
 }
