@@ -1,7 +1,6 @@
 use nalgebra::{RealField, Scalar};
 use alga::general::{Additive, Identity};
 use std::ops::{Add, AddAssign, Sub, SubAssign, Mul, Div};
-use std::num;
 
 #[derive(Clone, Copy, Debug, Default, PartialEq, PartialOrd, Eq)]
 pub struct Vec2<T: Scalar> {
@@ -88,7 +87,7 @@ impl<T: Scalar + Add<Output = T> + Mul<Output = T>> Mul for Vec2<T> {
 
 impl<T: Scalar + Mul<Output = T>> Mul<T> for Vec2<T> {
     type Output = Self;
-    
+
     fn mul(self, rhs: T) -> Self {
         Vec2::from_values(self.x * rhs, self.y * rhs)
     }
@@ -96,7 +95,7 @@ impl<T: Scalar + Mul<Output = T>> Mul<T> for Vec2<T> {
 
 impl<T: Scalar + Div<Output = T>> Div<T> for Vec2<T> {
     type Output = Self;
-    
+
     fn div(self, rhs: T) -> Self {
         Vec2::from_values(self.x / rhs, self.y / rhs)
     }
