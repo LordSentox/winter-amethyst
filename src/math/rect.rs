@@ -1,6 +1,7 @@
 use std::ops::{Add, AddAssign};
 use super::Vec2;
 use nalgebra::{RealField, Scalar};
+use amethyst::core::Transform;
 
 /// Represents a Rectangle with the value type T.
 #[derive(Copy, Clone, Debug, Default)]
@@ -13,6 +14,20 @@ pub struct Rect<T: Scalar> {
     pub w: T,
     /// The height of the Rect.
     pub h: T
+}
+
+impl Rect<f32> {
+    /// Create a Rectangle from the given transform and the size provided.
+    /// The resulting rectangle will have the width and height according to
+    /// the size, with the transforms x and y being in the middle.
+    pub fn from_transform_as_middle(transform: &Transform, size: Vec2<f32>) -> Rect<f32> {
+        Rect {
+            x: transform.translation().x + (size.x / 2.),
+            y: transform.translation().y + (size.y / 2.),
+            w: size.x,
+            h: size.y
+        }
+    }
 }
 
 impl<T: Scalar> Rect<T> {
