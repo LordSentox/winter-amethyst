@@ -1,0 +1,18 @@
+/*!
+    @import /amethyst_input/src/bindings.rs#Bindings, StringBindings
+    Bindings<StringBindings>
+*/
+
+(
+    axes: {
+        "player_x": Emulated(
+            pos: ScanCode(0x07),
+            neg: ScanCode(0x04)
+        ),
+        "player_y": Emulated(
+            pos: ScanCode(0x16),
+            neg: ScanCode(0x1a)
+        )
+    },
+    actions: {}
+)
