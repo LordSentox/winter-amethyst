@@ -19,6 +19,15 @@ pub struct Collider {
 }
 
 impl Collider {
+    /// Create a new collider with optional tenacity. If no tenacity is given,
+    /// the maximum value is used, making the object essentially immovable.
+    pub fn new(size: Vec2<f32>, tenacity: Option<u8>) -> Collider {
+        Collider {
+            size,
+            tenacity: tenacity.unwrap_or(u8::max_value())
+        }
+    }
+
     pub fn size(&self) -> Vec2<f32> { self.size }
 
     pub fn tenacity(&self) -> u8 { self.tenacity }

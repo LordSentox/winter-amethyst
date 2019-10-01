@@ -5,6 +5,8 @@ use amethyst::{
 };
 
 use crate::load_sprite_sheet;
+use crate::systems::collision::Collider;
+use crate::math::Vec2;
 
 #[derive(Component, Default, PartialEq)]
 #[storage(HashMapStorage)]
@@ -32,10 +34,15 @@ impl Player {
             sprite_number: 1
         };
 
+        // The player is a collider, and not a very tenacious one, since most
+        // of the objects the player will interact with should not be pushable
+        let collider = Collider::new(Vec2::from_values(64., 64.), Some(1));
+
         world.create_entity()
             .with(transform)
             .with(sprite)
             .with(Player::new())
+            .with(collider)
             .with(Transparent)
             .named("player")
             .build()
