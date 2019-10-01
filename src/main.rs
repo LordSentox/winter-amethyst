@@ -16,6 +16,7 @@ use amethyst::{
 use amethyst::LogLevelFilter;
 
 mod math;
+mod map;
 mod player;
 mod systems;
 mod winter;
