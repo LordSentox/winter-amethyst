@@ -1,11 +1,13 @@
 use amethyst::{
     prelude::*,
+    assets::{AssetStorage, Handle, Loader},
     core::TransformBundle,
     input::{InputBundle, StringBindings},
     renderer::{
         plugins::{RenderFlat2D, RenderToWindow},
         RenderingBundle,
         types::DefaultBackend,
+        ImageFormat, SpriteSheetFormat, Texture
     },
     window::DisplayConfig,
     utils::application_root_dir
@@ -50,4 +52,19 @@ fn main() -> amethyst::Result<()> {
     game.run();
 
     Ok(())
+}
+
+pub fn load_sprite_sheet(world: &mut World, image_path: &str) -> Handle<SpriteSheet> {
+    let loader = world.read_resource::<Loader>();
+
+    let texture_handle = {
+        let texture_storage = world.read_resource::<AssetStorage<Texture>>();
+        loader.load(image_path, ImageFormat::default(), (), &texture_storage)
+    };
+
+    let sprite_sheet_store = world.read_resource::<AssetStorage<SpriteSheet>>();
+    let mut ron_path = String::from(image_path.split_at(image_path.rfind('.').expect("Image has no file type")).0);
+    ron_path.push_str(".ron");
+
+    loader.load(ron_path, SpriteSheetFormat(texture_handle), (), &sprite_sheet_store)
 }
