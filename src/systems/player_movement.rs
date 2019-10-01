@@ -20,13 +20,16 @@ impl<'s> System<'s> for PlayerMovement {
         let x_dir = input.axis_value("player_x").unwrap();
         let y_dir = input.axis_value("player_y").unwrap();
 
-        // Create a normalised movement vector to work with
-        let dir: Vec2<f32> = Vec2::from_values(x_dir, y_dir);
-        let dir = dir / dir.len();
+        // Check if there is any movement at all
+        if x_dir != 0. || y_dir != 0. {
+            // Create a normalised movement vector to work with
+            let dir: Vec2<f32> = Vec2::from_values(x_dir, y_dir);
+            let dir = dir / dir.len();
 
-        for (player, transform) in (&players, &mut transforms).join() {
-            transform.prepend_translation_x(dir.x * player.speed());
-            transform.prepend_translation_y(dir.y * player.speed());
+            for (player, transform) in (&players, &mut transforms).join() {
+                transform.prepend_translation_x(dir.x * player.speed());
+                transform.prepend_translation_y(dir.y * player.speed());
+            }
         }
     }
 }
