@@ -11,6 +11,7 @@ amethyst = "0.13.0"
 nalgebra = "0.18.1"
 alga = "0.9.1"
 specs = "0.15.1"
+hibitset = "0.6.2"
 
 [features]
 default = ["vulkan"]

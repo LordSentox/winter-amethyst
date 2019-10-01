@@ -16,7 +16,7 @@ impl<'s> System<'s> for PlayerMovement {
         Read<'s, InputHandler<StringBindings>>
     );
 
-    fn run(&mut self, (mut players, mut transforms, input): Self::SystemData) {
+    fn run(&mut self, (players, mut transforms, input): Self::SystemData) {
         let x_dir = input.axis_value("player_x").unwrap();
         let y_dir = input.axis_value("player_y").unwrap();
 

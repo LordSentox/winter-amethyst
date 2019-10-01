@@ -10,7 +10,6 @@ use amethyst::{
 };
 
 use crate::player::Player;
-use crate::math::Vec2;
 
 pub struct Winter;
 
