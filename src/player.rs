@@ -1,8 +1,9 @@
 use amethyst::{
-    ecs::{Component, DenseVecStorage}
+    ecs::{Component, HashMapStorage}
 };
 
-#[derive(Default, PartialEq)]
+#[derive(Component, Default, PartialEq)]
+#[storage(HashMapStorage)]
 pub struct Player {
     speed: f32
 }
@@ -15,8 +16,4 @@ impl Player {
     }
 
     pub fn speed(&self) -> f32 { self.speed }
-}
-
-impl Component for Player {
-    type Storage = DenseVecStorage<Self>;
 }
