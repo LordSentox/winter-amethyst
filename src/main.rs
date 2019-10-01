@@ -26,6 +26,7 @@ fn main() -> amethyst::Result<()> {
         .start();
 
     let app_root = application_root_dir()?;
+    //let app_root = std::path::Path::new("/home/sentox/External/Code/winter-amethyst"); // FIXME: Just for debugging
     let assets_dir = app_root.join("assets");
     let config_dir = app_root.join("config");
 
